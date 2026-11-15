@@ -2,7 +2,7 @@ board_version: 2
 lead:
   owner: lead-codex
   integration_branch: codex/python-phase0
-  validated_commit: 8502e4e
+  validated_commit: eb01d58
   contract_version: contracts-v1-python
 
 statuses: [BLOCKED, READY, ACTIVE, REVIEW, MERGED, VALIDATED, SUPERSEDED]
@@ -81,7 +81,7 @@ waves:
         scope: Rules baseline and point-in-time cases
       - id: P2-MODEL-001
         owner: worker-model-gateway
-        status: ACTIVE
+        status: VALIDATED
         requirements: [AGT-002, AGT-003, AGT-004, REC-002]
         acceptance_tests: [AT-004, AT-005, AT-025, AT-026]
         scope: Model gateway and structured-output boundary
@@ -92,25 +92,25 @@ waves:
     tasks:
       - id: P3-COR-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [COR-002, COR-003, COR-004, COR-006, COR-007]
         acceptance_tests: [AT-007, AT-033]
         scope: Coordinator DAG, budgets and recovery
       - id: P3-RESEARCH-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [AGT-001, AGT-002, AGT-005]
         acceptance_tests: [AT-004, AT-006]
         scope: Research Agent
       - id: P3-CRITIC-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [COR-005, REC-006]
         acceptance_tests: [AT-008]
         scope: Independent Critic Agent
       - id: P3-PORTFOLIO-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [REC-003, REC-004, REC-005, REC-007]
         acceptance_tests: [AT-009]
         scope: Portfolio Agent and target-position proposal

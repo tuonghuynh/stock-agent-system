@@ -4,13 +4,13 @@ Codex must update this file after each completed increment. Do not mark an item 
 
 ## Current status
 
-- Current phase: Wave 1 validated; Wave 2 ready
-- Active requirement IDs: EXE-002, EXE-005..EXE-009, RSK-003, RSK-004, RSK-010, REL-005, REL-006, REC-001, EVA-001, EVA-002, AGT-002..AGT-004, REC-002
-- Last successful full build: Wave 1 integration verification passed 2026-11-14 (42 tests, Ruff and strict mypy green)
+- Current phase: Wave 2 validated; Wave 3 ready
+- Active requirement IDs: COR-002..COR-007, AGT-001, AGT-002, AGT-005, REC-003..REC-007
+- Last successful full build: Wave 2 integration verification passed 2026-11-14 (92 tests, Ruff and strict mypy green)
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 2 — execution, risk and baseline validated; model gateway active
+- Active parallel wave: Wave 2 validated at `eb01d58`; Wave 3 ready for dispatch
 
 ## Phase checklist
 
@@ -39,6 +39,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 | RSK-003, RSK-004, RSK-010, REL-005, REL-006 | Atomic cash/share reservations, material-input freshness, pending exposure and latched safety pause | `tests/risk/test_reservations.py`, `test_freshness_pause_authorization.py` / AT-010, AT-013, AT-014, AT-023 | Validated |
 | EXE-002, EXE-005, EXE-006, EXE-007, EXE-008, EXE-009 | Paper-only Alpaca boundary, ambiguity/restart recovery, fills, cancel races, reconciliation and deterministic pricing | `tests/execution/test_recovery_and_alpaca.py` / AT-017..AT-022, AT-036 | Validated |
 | REC-001, EVA-001, EVA-002 | Deterministic five-factor rules baseline and identical-snapshot three-variant comparison boundary | `tests/baseline/`, `tests/evaluation/` / AT-029, AT-030 | Validated |
+| AGT-002, AGT-003, AGT-004, REC-002 | Bounded structured model gateway with strict schemas, read-only tools, one repair, budgets and safe WAIT | `tests/model_gateway/test_gateway.py` / AT-004, AT-005, AT-025, AT-026 | Validated |
 
 ## Integrated worker handoffs
 
@@ -53,6 +54,7 @@ Only the lead updates this table after independently validating and integrating 
 | P2-RISK-001 | worker-risk-concurrency | `1c749ce` | RSK-003, RSK-004, RSK-010, REL-005, REL-006 / AT-010, AT-013, AT-014, AT-023 | 22 focused and 55 full tests; Ruff and strict mypy green | Validated |
 | P2-EXEC-001 | worker-execution-recovery | `a5127ee` | EXE-002, EXE-005..EXE-009 / AT-017..AT-022, AT-036 | 23 focused and 72 full tests; Ruff and strict mypy green | Validated |
 | P2-BASE-001 | worker-baseline | `97777d6` | REC-001, EVA-001, EVA-002 / AT-029, AT-030 | 8 focused and 80 full tests; Ruff and strict mypy green | Validated |
+| P2-MODEL-001 | worker-model-gateway | `eb01d58` | AGT-002, AGT-003, AGT-004, REC-002 / AT-004, AT-005, AT-025, AT-026 | 12 focused and 92 full tests; Ruff and strict mypy green | Validated |
 
 ## Development deployment evidence
 
@@ -116,6 +118,11 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `ruff check src tests` after P2-BASE-001 | PASS |
 | 2026-11-14 | `mypy src` after P2-BASE-001 | PASS — 47 source files, strict mode |
 | 2026-11-14 | `pytest` after P2-BASE-001 | PASS — 80 tests, 0 failures |
+| 2026-11-14 | `pytest tests/model_gateway` | PASS — 12 tests, 0 failures |
+| 2026-11-14 | `ruff check .` after P2-MODEL-001 | PASS |
+| 2026-11-14 | `mypy src` after P2-MODEL-001 | PASS — 51 source files, strict mode |
+| 2026-11-14 | `pytest` after P2-MODEL-001 | PASS — 92 tests, 0 failures |
+| 2026-11-14 | `uv lock --check` after Wave 2 | PASS — 56 packages resolved |
 
 ## Decisions and deviations
 
@@ -129,5 +136,5 @@ None recorded.
 
 ## Next action
 
-Integrate and validate P2-MODEL-001, then run the Wave 2 gate and freeze the next integration commit.
+Create Wave 3 worktrees from validated commit `eb01d58` and implement coordinator, research, critic and portfolio slices.
 
