@@ -1,7 +1,7 @@
 from threading import RLock
 from uuid import UUID
 
-from stock_agent.coordinator.models import RunRecord
+from stock_agent.coordinator.models import RunOutcome, RunRecord
 from stock_agent.domain.models import RunManifest
 
 
@@ -31,8 +31,23 @@ class InMemoryRunStore:
                 raise ValueError("run manifest cannot be mutated")
             if record.checkpoints[: len(current.checkpoints)] != current.checkpoints:
                 raise ValueError("checkpoint history is append-only")
+            if current.outcome is not RunOutcome.RUNNING and record.outcome is RunOutcome.RUNNING:
+                raise ValueError("terminal runs cannot be reopened through generic save")
             self._records[record.manifest.run_id] = record
             return record
+
+    def resume_step_failure(self, run_id: UUID) -> RunRecord:
+        with self._lock:
+            current = self._records.get(run_id)
+            if current is None:
+                raise KeyError(run_id)
+            if current.outcome is not RunOutcome.FAILED or current.failure_code != "STEP_FAILURE":
+                raise ValueError("only STEP_FAILURE runs may resume")
+            resumed = current.model_copy(
+                update={"outcome": RunOutcome.RUNNING, "failure_code": None}
+            )
+            self._records[run_id] = resumed
+            return resumed
 
     def get(self, run_id: UUID) -> RunRecord | None:
         with self._lock:

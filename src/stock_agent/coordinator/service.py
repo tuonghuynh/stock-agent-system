@@ -37,6 +37,8 @@ class Coordinator:
 
     def run(self, manifest: RunManifest) -> WorkflowResult:
         record = self._store.create_or_get(manifest)
+        if record.outcome is RunOutcome.FAILED and record.failure_code == "STEP_FAILURE":
+            record = self._store.resume_step_failure(manifest.run_id)
         if record.outcome is not RunOutcome.RUNNING:
             return self._result(record)
         try:

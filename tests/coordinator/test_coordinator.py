@@ -113,9 +113,6 @@ def test_at033_restart_resumes_without_rerunning_checkpointed_steps() -> None:
         Step.EVIDENCE,
         Step.RESEARCH,
     )
-    record = store.get(frozen.run_id)
-    assert record is not None
-    store.save(record.model_copy(update={"outcome": RunOutcome.RUNNING, "failure_code": None}))
     second = Coordinator(store, ports, lambda: NOW).run(frozen)
     assert second.outcome is RunOutcome.ACCEPTED
     assert (
@@ -124,6 +121,21 @@ def test_at033_restart_resumes_without_rerunning_checkpointed_steps() -> None:
         == ports.calls.count("portfolio")
         == 1
     )
+
+
+def test_non_retryable_terminal_outcome_cannot_be_reopened() -> None:
+    store = InMemoryRunStore()
+    ports = FakePorts(CriticDisposition.WAIT)
+    frozen = manifest()
+    first = Coordinator(store, ports, lambda: NOW).run(frozen)
+    assert first.outcome is RunOutcome.WAIT
+    assert Coordinator(store, ports, lambda: NOW).run(frozen) == first
+    with pytest.raises(ValueError, match="only STEP_FAILURE"):
+        store.resume_step_failure(frozen.run_id)
+    record = store.get(frozen.run_id)
+    assert record is not None
+    with pytest.raises(ValueError, match="terminal runs"):
+        store.save(record.model_copy(update={"outcome": RunOutcome.RUNNING}))
 
 
 def test_risk_rejection_never_reaches_execution() -> None:
