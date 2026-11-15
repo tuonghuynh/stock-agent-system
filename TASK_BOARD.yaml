@@ -1,0 +1,168 @@
+board_version: 2
+lead:
+  owner: lead-codex
+  integration_branch: codex/integration-phase-0
+  validated_commit: uncreated-python-foundation
+  contract_version: unestablished-python
+
+statuses: [BLOCKED, READY, ACTIVE, REVIEW, MERGED, VALIDATED, SUPERSEDED]
+
+rules:
+  maximum_concurrent_implementation_workers: 4
+  one_worktree_per_worker: true
+  overlapping_owned_paths_allowed: false
+  workers_may_merge: false
+  workers_may_edit_progress: false
+  workers_may_edit_task_board: false
+  live_trading_changes_allowed: false
+
+waves:
+  - id: FOUNDATION
+    prerequisite: none
+    integration_gate: contracts-v1 frozen and full build green
+    tasks:
+      - id: P0-BOOT-001
+        owner: lead
+        status: ACTIVE
+        requirements: [POL-001, COR-001, CHG-001]
+        acceptance_tests: [AT-001, AT-002]
+        scope: Bootstrap, canonical contracts, build, migrations and fixtures
+
+  - id: WAVE-1
+    prerequisite: P0-BOOT-001 VALIDATED
+    integration_gate: module tests, full verify and fake-broker lifecycle green
+    tasks:
+      - id: P1-EXEC-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [EXE-001, EXE-003, EXE-004]
+        acceptance_tests: [AT-016]
+        scope: Execution state, idempotency and fake broker
+      - id: P1-RISK-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [RSK-001, RSK-002, RSK-005, RSK-008, RSK-009]
+        acceptance_tests: [AT-011, AT-012, AT-015]
+        scope: Deterministic policy and risk rules
+      - id: P1-DATA-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [DAT-001, DAT-002, DAT-003, DAT-004]
+        acceptance_tests: [AT-029]
+        scope: Evidence provenance, indicators and fixtures
+      - id: P1-OBS-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [OBS-001, OBS-002, OBS-004, SEC-004]
+        acceptance_tests: [AT-003, AT-027, AT-028]
+        scope: Audit, tracing, redaction and adversarial fixtures
+
+  - id: WAVE-2
+    prerequisite: WAVE-1 VALIDATED
+    integration_gate: migrations, concurrency, restart and injection tests green
+    tasks:
+      - id: P2-EXEC-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [EXE-002, EXE-005, EXE-006, EXE-007, EXE-008, EXE-009]
+        acceptance_tests: [AT-017, AT-018, AT-019, AT-020, AT-021, AT-022, AT-036]
+        scope: Alpaca paper adapter and execution recovery
+      - id: P2-RISK-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [RSK-003, RSK-004, RSK-010, REL-005, REL-006]
+        acceptance_tests: [AT-010, AT-013, AT-014, AT-023]
+        scope: Reservations, concurrency, freshness and pause
+      - id: P2-BASE-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [REC-001, EVA-001, EVA-002]
+        acceptance_tests: [AT-029, AT-030]
+        scope: Rules baseline and point-in-time cases
+      - id: P2-MODEL-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [AGT-002, AGT-003, AGT-004, REC-002]
+        acceptance_tests: [AT-004, AT-005, AT-025, AT-026]
+        scope: Model gateway and structured-output boundary
+
+  - id: WAVE-3
+    prerequisite: WAVE-2 VALIDATED
+    integration_gate: all decision outcomes and permission tests green
+    tasks:
+      - id: P3-COR-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [COR-002, COR-003, COR-004, COR-006, COR-007]
+        acceptance_tests: [AT-007, AT-033]
+        scope: Coordinator DAG, budgets and recovery
+      - id: P3-RESEARCH-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [AGT-001, AGT-002, AGT-005]
+        acceptance_tests: [AT-004, AT-006]
+        scope: Research Agent
+      - id: P3-CRITIC-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [COR-005, REC-006]
+        acceptance_tests: [AT-008]
+        scope: Independent Critic Agent
+      - id: P3-PORTFOLIO-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [REC-003, REC-004, REC-005, REC-007]
+        acceptance_tests: [AT-009]
+        scope: Portfolio Agent and target-position proposal
+
+  - id: WAVE-4
+    prerequisite: WAVE-3 VALIDATED
+    integration_gate: all required local acceptance tests green and candidate commit frozen
+    tasks:
+      - id: P4-E2E-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [EXE-010, EXE-011]
+        acceptance_tests: [AT-024, AT-025, AT-035]
+        scope: End-to-end accepted and rejected paths
+      - id: P4-REL-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [REL-001, REL-002, REL-003, REL-004, REL-007]
+        acceptance_tests: [AT-017, AT-018, AT-020, AT-021, AT-022, AT-033, AT-034]
+        scope: Reliability and failure recovery
+      - id: P4-EVA-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [EVA-001, EVA-003, EVA-004, EVA-005]
+        acceptance_tests: [AT-030, AT-031, AT-032]
+        scope: Baseline comparison and reports
+      - id: P4-SEC-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [SEC-001, SEC-002, SEC-003, SEC-004, SEC-005]
+        acceptance_tests: [AT-003, AT-025, AT-026, AT-027, AT-028]
+        scope: Security, injection and trace validation
+
+  - id: WAVE-5
+    prerequisite: WAVE-4 VALIDATED
+    integration_gate: exact commit deployed; AT-037 through AT-043 green; rollback proven
+    tasks:
+      - id: P5-DPL-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [DPL-001, DPL-002, DPL-003, DPL-004, DPL-005]
+        acceptance_tests: [AT-037, AT-038, AT-039]
+        scope: Docker packaging, Render Blueprint, migrations and deployment automation
+      - id: P5-REMOTE-001
+        owner: unassigned
+        status: BLOCKED
+        requirements: [DPL-006, DPL-007]
+        acceptance_tests: [AT-040, AT-041, AT-042]
+        scope: Remote integration, restart and Alpaca paper read-only smoke tests
+      - id: P5-ROLLBACK-001
+        owner: lead
+        status: BLOCKED
+        requirements: [DPL-008, DPL-009, DPL-010]
+        acceptance_tests: [AT-043]
+        scope: Deployment evidence, rollback and final completion report

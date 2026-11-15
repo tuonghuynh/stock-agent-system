@@ -1,0 +1,101 @@
+policy_id: personal-growth-policy
+version: 1
+effective_from: 2026-11-08
+
+objective:
+  primary: long_term_capital_growth
+  benchmark: SPY
+  holding_period_trading_days:
+    minimum: 5
+    maximum: 60
+
+universe:
+  memberships:
+    - NASDAQ_100
+    - SP_100
+  allowed_etfs:
+    - SPY
+    - QQQ
+    - SMH
+    - XLK
+    - IWM
+  minimum_share_price_usd: 10
+  minimum_market_cap_usd: 10000000000
+  minimum_average_daily_dollar_volume_usd: 50000000
+  prohibited:
+    - OTC
+    - LEVERAGED_ETF
+    - INVERSE_ETF
+    - OPTION
+    - CRYPTO
+    - SHORT_POSITION
+
+portfolio:
+  initial_paper_capital_usd: 30000
+  maximum_initial_position_pct: 3
+  maximum_addition_pct: 2
+  maximum_single_stock_pct: 10
+  maximum_single_etf_pct: 20
+  maximum_technology_sector_pct: 50
+  maximum_other_sector_pct: 25
+  minimum_cash_pct: 15
+  maximum_new_exposure_per_day_pct: 10
+  maximum_new_positions_per_day: 3
+  maximum_weekly_turnover_pct: 25
+  grandfather_positions_above_limit: true
+
+execution:
+  environment: PAPER
+  human_approval_required: false
+  regular_market_hours_only: true
+  allowed_order_types:
+    - LIMIT
+  time_in_force: DAY
+  margin_allowed: false
+  short_selling_allowed: false
+  options_allowed: false
+  live_trading_enabled: false
+
+freshness:
+  execution_quote_seconds: 60
+  account_snapshot_seconds: 30
+  positions_snapshot_seconds: 30
+  pending_orders_snapshot_seconds: 30
+  news_search_minutes: 30
+  recommendation_max_hours: 24
+  recommendation_expires_at_next_market_close: true
+
+decision:
+  minimum_executable_confidence: 65
+  require_bull_base_bear_cases: true
+  require_contradicting_evidence: true
+  require_invalidation_condition: true
+  unresolved_material_conflict_action: NEEDS_REVIEW
+  missing_material_data_action: WAIT
+  avoid_parabolic_entry:
+    enabled: true
+    maximum_pct_above_50_day_average: 15
+  normal_entry_blackout_before_earnings_trading_days: 2
+
+pause:
+  daily_loss_pct: 3
+  weekly_loss_pct: 6
+  peak_to_trough_drawdown_pct: 10
+  consecutive_system_rejections: 3
+  pause_on_reconciliation_failure: true
+  pause_on_required_audit_failure: true
+  cancel_orders_on_pause: false
+  liquidate_positions_on_pause: false
+
+preferences:
+  favor:
+    - PROFITABLE_MARKET_LEADERS
+    - DURABLE_FREE_CASH_FLOW
+    - TECHNOLOGY
+    - AI_INFRASTRUCTURE
+  entry_style:
+    - FUNDAMENTAL_SELECTION
+    - TREND_CONFIRMATION
+    - STAGED_PURCHASE
+  tax_aware: true
+
