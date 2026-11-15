@@ -10,7 +10,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 4 — end-to-end, reliability and security gates active
+- Active parallel wave: Wave 4 — lifecycle, reliability and security validated; evaluation active
 
 ## Phase checklist
 
@@ -177,5 +177,5 @@ None recorded.
 
 ## Next action
 
-Integrate and validate the active end-to-end, reliability and security handoffs, then dispatch evaluation reporting from the next green commit.
+Integrate and validate P4-EVA-001, run the complete local acceptance gate, then prepare Wave 5 deployment artifacts.
 

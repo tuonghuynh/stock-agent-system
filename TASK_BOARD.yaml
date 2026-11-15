@@ -132,8 +132,8 @@ waves:
         acceptance_tests: [AT-017, AT-018, AT-020, AT-021, AT-022, AT-033, AT-034]
         scope: Reliability and failure recovery
       - id: P4-EVA-001
-        owner: unassigned
-        status: READY
+        owner: worker-evaluation
+        status: ACTIVE
         requirements: [EVA-001, EVA-003, EVA-004, EVA-005]
         acceptance_tests: [AT-030, AT-031, AT-032]
         scope: Baseline comparison and reports
