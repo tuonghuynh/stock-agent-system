@@ -98,7 +98,7 @@ waves:
         scope: Coordinator DAG, budgets and recovery
       - id: P3-RESEARCH-001
         owner: worker-research-agent
-        status: ACTIVE
+        status: VALIDATED
         requirements: [AGT-001, AGT-002, AGT-005]
         acceptance_tests: [AT-004, AT-006]
         scope: Research Agent
