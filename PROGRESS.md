@@ -10,7 +10,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 1 — execution, risk and evidence workers active
+- Active parallel wave: Wave 1 — execution, risk and evidence validated; observability active
 
 ## Phase checklist
 
@@ -104,5 +104,5 @@ None recorded.
 
 ## Next action
 
-Integrate and independently validate the active execution, risk and evidence handoffs, then dispatch the observability slice from the validated integration commit.
+Integrate and independently validate P1-OBS-001, then run the Wave 1 integration gate and freeze the next validated commit.
 

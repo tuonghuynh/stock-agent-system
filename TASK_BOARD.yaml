@@ -52,7 +52,7 @@ waves:
         scope: Evidence provenance, indicators and fixtures
       - id: P1-OBS-001
         owner: worker-observability
-        status: READY
+        status: ACTIVE
         requirements: [OBS-001, OBS-002, OBS-004, SEC-004]
         acceptance_tests: [AT-003, AT-027, AT-028]
         scope: Audit, tracing, redaction and adversarial fixtures
