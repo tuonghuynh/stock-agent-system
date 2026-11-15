@@ -42,6 +42,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 | AGT-002, AGT-003, AGT-004, REC-002 | Bounded structured model gateway with strict schemas, read-only tools, one repair, budgets and safe WAIT | `tests/model_gateway/test_gateway.py` / AT-004, AT-005, AT-025, AT-026 | Validated |
 | COR-005, REC-006 | Independent deterministic critic with material objections, bounded dispositions and no execution authority | `tests/agents/critic/test_critic.py` / AT-008 | Validated |
 | AGT-001, AGT-002, AGT-005 | Five-dimension evidence-linked research agent with opaque references, immutable findings and safe WAIT | `tests/agents/research/test_research_agent.py` / AT-004, AT-006 | Validated |
+| REC-003, REC-004, REC-005, REC-007 | Deterministic multi-agent portfolio synthesis with complete proposal, conflict containment and no execution authority | `tests/agents/portfolio/test_synthesis.py` / AT-009 | Validated |
 
 ## Integrated worker handoffs
 
@@ -59,6 +60,7 @@ Only the lead updates this table after independently validating and integrating 
 | P2-MODEL-001 | worker-model-gateway | `eb01d58` | AGT-002, AGT-003, AGT-004, REC-002 / AT-004, AT-005, AT-025, AT-026 | 12 focused and 92 full tests; Ruff and strict mypy green | Validated |
 | P3-CRITIC-001 | worker-critic-agent | `4bb15b9` | COR-005, REC-006 / AT-008 | 8 focused and 100 full tests; Ruff and strict mypy green | Validated |
 | P3-RESEARCH-001 | worker-research-agent | `2f2d656` | AGT-001, AGT-002, AGT-005 / AT-004, AT-006 | 10 focused and 110 full tests; Ruff and strict mypy green | Validated |
+| P3-PORTFOLIO-001 | worker-portfolio-agent | `d2c941c` | REC-003, REC-004, REC-005, REC-007 / AT-009 | 8 focused and 118 full tests; Ruff and strict mypy green | Validated |
 
 ## Development deployment evidence
 
@@ -135,6 +137,10 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `ruff check src/stock_agent/agents/research tests/agents/research` | PASS |
 | 2026-11-14 | `mypy src` after P3-RESEARCH-001 | PASS — 57 source files, strict mode |
 | 2026-11-14 | `pytest` after P3-RESEARCH-001 | PASS — 110 tests, 0 failures |
+| 2026-11-14 | `pytest tests/agents/portfolio` | PASS — 8 tests, 0 failures |
+| 2026-11-14 | `ruff check .` after P3-PORTFOLIO-001 | PASS |
+| 2026-11-14 | `mypy src` after P3-PORTFOLIO-001 | PASS — 60 source files, strict mode |
+| 2026-11-14 | `pytest` after P3-PORTFOLIO-001 | PASS — 118 tests, 0 failures |
 
 ## Decisions and deviations
 

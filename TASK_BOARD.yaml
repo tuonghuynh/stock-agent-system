@@ -110,7 +110,7 @@ waves:
         scope: Independent Critic Agent
       - id: P3-PORTFOLIO-001
         owner: worker-portfolio-agent
-        status: ACTIVE
+        status: VALIDATED
         requirements: [REC-003, REC-004, REC-005, REC-007]
         acceptance_tests: [AT-009]
         scope: Portfolio Agent and target-position proposal
