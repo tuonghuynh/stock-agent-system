@@ -80,8 +80,8 @@ waves:
         acceptance_tests: [AT-029, AT-030]
         scope: Rules baseline and point-in-time cases
       - id: P2-MODEL-001
-        owner: unassigned
-        status: READY
+        owner: worker-model-gateway
+        status: ACTIVE
         requirements: [AGT-002, AGT-003, AGT-004, REC-002]
         acceptance_tests: [AT-004, AT-005, AT-025, AT-026]
         scope: Model gateway and structured-output boundary

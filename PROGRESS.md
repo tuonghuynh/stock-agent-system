@@ -10,7 +10,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 2 — execution recovery, risk concurrency and deterministic baseline active
+- Active parallel wave: Wave 2 — execution, risk and baseline validated; model gateway active
 
 ## Phase checklist
 
@@ -129,5 +129,5 @@ None recorded.
 
 ## Next action
 
-Integrate and validate the active Wave 2 execution, risk and baseline handoffs, then dispatch the structured model-output boundary from the next green commit.
+Integrate and validate P2-MODEL-001, then run the Wave 2 gate and freeze the next integration commit.
 
