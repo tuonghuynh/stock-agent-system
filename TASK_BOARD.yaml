@@ -104,7 +104,7 @@ waves:
         scope: Research Agent
       - id: P3-CRITIC-001
         owner: worker-critic-agent
-        status: ACTIVE
+        status: VALIDATED
         requirements: [COR-005, REC-006]
         acceptance_tests: [AT-008]
         scope: Independent Critic Agent
