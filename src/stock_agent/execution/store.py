@@ -64,3 +64,12 @@ class InMemoryExecutionStore:
     def find_by_idempotency_key(self, key: str) -> StoredExecution | None:
         with self._lock:
             return self._by_key.get(key)
+
+    def find_by_intent_id(self, intent_id: UUID) -> StoredExecution | None:
+        with self._lock:
+            key = self._keys_by_intent.get(intent_id)
+            return self._by_key.get(key) if key is not None else None
+
+    def all_executions(self) -> tuple[StoredExecution, ...]:
+        with self._lock:
+            return tuple(self._by_key.values())
