@@ -1,0 +1,13 @@
+release_version: release-v1
+workflow_version: workflow-v1
+schema_version: contracts-v1
+policy_version: 1
+prompt_versions:
+  research: research-v1
+  critic: critic-v1
+  portfolio: portfolio-v1
+  single_agent: single-agent-v1
+tool_versions:
+  evidence_lookup: evidence-lookup-v1
+  portfolio_summary: portfolio-summary-v1
+  calculator: calculator-v1

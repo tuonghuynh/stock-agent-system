@@ -1,9 +1,9 @@
 board_version: 2
 lead:
   owner: lead-codex
-  integration_branch: codex/integration-phase-0
-  validated_commit: uncreated-python-foundation
-  contract_version: unestablished-python
+  integration_branch: codex/python-phase0
+  validated_commit: pending-foundation-commit
+  contract_version: contracts-v1-python
 
 statuses: [BLOCKED, READY, ACTIVE, REVIEW, MERGED, VALIDATED, SUPERSEDED]
 
@@ -23,7 +23,7 @@ waves:
     tasks:
       - id: P0-BOOT-001
         owner: lead
-        status: ACTIVE
+        status: VALIDATED
         requirements: [POL-001, COR-001, CHG-001]
         acceptance_tests: [AT-001, AT-002]
         scope: Bootstrap, canonical contracts, build, migrations and fixtures
@@ -33,26 +33,26 @@ waves:
     integration_gate: module tests, full verify and fake-broker lifecycle green
     tasks:
       - id: P1-EXEC-001
-        owner: unassigned
-        status: BLOCKED
+        owner: worker-execution
+        status: READY
         requirements: [EXE-001, EXE-003, EXE-004]
         acceptance_tests: [AT-016]
         scope: Execution state, idempotency and fake broker
       - id: P1-RISK-001
-        owner: unassigned
-        status: BLOCKED
+        owner: worker-risk
+        status: READY
         requirements: [RSK-001, RSK-002, RSK-005, RSK-008, RSK-009]
         acceptance_tests: [AT-011, AT-012, AT-015]
         scope: Deterministic policy and risk rules
       - id: P1-DATA-001
-        owner: unassigned
-        status: BLOCKED
+        owner: worker-data
+        status: READY
         requirements: [DAT-001, DAT-002, DAT-003, DAT-004]
         acceptance_tests: [AT-029]
         scope: Evidence provenance, indicators and fixtures
       - id: P1-OBS-001
-        owner: unassigned
-        status: BLOCKED
+        owner: worker-observability
+        status: READY
         requirements: [OBS-001, OBS-002, OBS-004, SEC-004]
         acceptance_tests: [AT-003, AT-027, AT-028]
         scope: Audit, tracing, redaction and adversarial fixtures

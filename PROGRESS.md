@@ -4,17 +4,17 @@ Codex must update this file after each completed increment. Do not mark an item 
 
 ## Current status
 
-- Current phase: Phase 0 — Python foundation restart
-- Active requirement IDs: POL-001, POL-002, COR-001, CHG-001
-- Last successful full build: Not run for Python implementation
+- Current phase: Phase 1 / Wave 1 ready
+- Active requirement IDs: EXE-001, EXE-003, EXE-004, RSK-001, RSK-002, RSK-005, RSK-008, RSK-009, DAT-001..DAT-004, OBS-001, OBS-002, OBS-004, SEC-004
+- Last successful full build: Python foundation verification passed 2026-11-14 (11 tests, Ruff and strict mypy green)
 - Blocking issues: None
-- Integration branch: `codex/integration-phase-0`
-- Frozen contract version: Not established for Python implementation
-- Active parallel wave: None
+- Integration branch: `codex/python-phase0`
+- Frozen contract version: `contracts-v1-python`
+- Active parallel wave: Wave 1 ready
 
 ## Phase checklist
 
-- [ ] Phase 0 — Repository and contracts
+- [x] Phase 0 — Repository and contracts
 - [ ] Phase 1 — Execution foundation
 - [ ] Phase 2 — Deterministic policy and risk
 - [ ] Phase 3 — Data, evidence and baselines
@@ -27,7 +27,11 @@ Codex must update this file after each completed increment. Do not mark an item 
 
 | Requirement IDs | Implementation | Tests/validation | Status |
 |---|---|---|---|
-| POL-001, POL-002, COR-001, CHG-001 | Python foundation not implemented | No evidence yet | Not started |
+| POL-001 | Strict Policy v1 loader plus immutable, idempotent version store | `test_policy.py`, `test_policy_store.py` / AT-001 | Validated |
+| POL-002, COR-001 | Frozen canonical Pydantic contracts carrying exact versions | `test_domain_models.py` / AT-002 | Validated |
+| CHG-001 | Versioned release, workflow, schema, prompts and tools | `test_release.py` | Validated |
+| SEC-001 foundation | Package boundary prohibits agent access to execution | `test_architecture.py` | Validated |
+| DPL-004 foundation | Alembic migration compiles for PostgreSQL | `test_migrations.py` | Validated locally; live PostgreSQL application remains deployment-gate work |
 
 ## Integrated worker handoffs
 
@@ -66,7 +70,10 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 
 | Date/time | Command | Result |
 |---|---|---|
-| — | — | No Python commands run yet |
+| 2026-11-14 | `uv lock --check` | PASS — 56 packages locked |
+| 2026-11-14 | `pytest` | PASS — 11 tests, 0 failures |
+| 2026-11-14 | `ruff check .` | PASS |
+| 2026-11-14 | `mypy src` | PASS — 21 source files, strict mode |
 
 ## Decisions and deviations
 
@@ -76,9 +83,9 @@ None recorded.
 
 ## Known limitations
 
-- Docker is not currently available locally. This does not block the Python foundation; a real PostgreSQL-compatible migration test remains required before Phase 0 validation.
+- Docker is not currently available locally. Alembic PostgreSQL SQL generation is validated; applying migrations to a real PostgreSQL service remains required in the broader integration and deployment gates.
 
 ## Next action
 
-Create and validate the Python Phase 0 foundation, then freeze new Python contracts before restarting parallel work.
+Commit the validated Python foundation, create isolated Wave 1 worktrees, and implement execution, risk, evidence and observability slices.
 
