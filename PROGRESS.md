@@ -44,6 +44,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 | AGT-001, AGT-002, AGT-005 | Five-dimension evidence-linked research agent with opaque references, immutable findings and safe WAIT | `tests/agents/research/test_research_agent.py` / AT-004, AT-006 | Validated |
 | REC-003, REC-004, REC-005, REC-007 | Deterministic multi-agent portfolio synthesis with complete proposal, conflict containment and no execution authority | `tests/agents/portfolio/test_synthesis.py` / AT-009 | Validated |
 | COR-002, COR-003, COR-004, COR-006, COR-007 | Fixed checkpointed DAG with shared budgets, one revision, risk-before-execution and public restart recovery | `tests/coordinator/test_coordinator.py` / AT-007, AT-033 | Validated |
+| REL-001, REL-002, REL-003, REL-004, REL-007 | Exclusive lease claiming, bounded retry taxonomy, reconciliation cadence, readiness and non-destructive side-effect pause | `tests/reliability/` / AT-017, AT-018, AT-020..AT-022, AT-033, AT-034 | Validated |
 
 ## Integrated worker handoffs
 
@@ -63,6 +64,7 @@ Only the lead updates this table after independently validating and integrating 
 | P3-RESEARCH-001 | worker-research-agent | `2f2d656` | AGT-001, AGT-002, AGT-005 / AT-004, AT-006 | 10 focused and 110 full tests; Ruff and strict mypy green | Validated |
 | P3-PORTFOLIO-001 | worker-portfolio-agent | `d2c941c` | REC-003, REC-004, REC-005, REC-007 / AT-009 | 8 focused and 118 full tests; Ruff and strict mypy green | Validated |
 | P3-COR-001 | worker-coordinator | `61f10a9` | COR-002, COR-003, COR-004, COR-006, COR-007 / AT-007, AT-033 | 8 focused and 126 full tests; Ruff and strict mypy green | Validated |
+| P4-REL-001 | worker-reliability | `668b21d` | REL-001..REL-004, REL-007 / AT-017, AT-018, AT-020..AT-022, AT-033, AT-034 | 12 focused and 138 full tests; Ruff and strict mypy green | Validated |
 
 ## Development deployment evidence
 
@@ -148,6 +150,10 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `mypy src` after P3-COR-001 | PASS — 63 source files, strict mode |
 | 2026-11-14 | `pytest` after P3-COR-001 | PASS — 126 tests, 0 failures |
 | 2026-11-14 | `uv lock --check` after Wave 3 | PASS — 56 packages resolved |
+| 2026-11-14 | `pytest tests/reliability` | PASS — 12 tests, 0 failures |
+| 2026-11-14 | `ruff check src/stock_agent/reliability tests/reliability` | PASS |
+| 2026-11-14 | `mypy src` after P4-REL-001 | PASS — 70 source files, strict mode |
+| 2026-11-14 | `pytest` after P4-REL-001 | PASS — 138 tests, 0 failures |
 
 ## Decisions and deviations
 
