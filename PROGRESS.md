@@ -4,23 +4,23 @@ Codex must update this file after each completed increment. Do not mark an item 
 
 ## Current status
 
-- Current phase: Wave 3 validated; Wave 4 ready
-- Active requirement IDs: EXE-010, EXE-011, REL-001..REL-004, REL-007, EVA-001, EVA-003..EVA-005, SEC-001..SEC-005
-- Last successful full build: Wave 3 integration verification passed 2026-11-14 (126 tests, Ruff and strict mypy green)
+- Current phase: Wave 4 validated; Wave 5 deployment packaging ready
+- Active requirement IDs: DPL-001..DPL-010
+- Last successful full build: Wave 4 local acceptance verification passed 2026-11-14 (164 tests, Ruff and strict mypy green)
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 4 — lifecycle, reliability and security validated; evaluation active
+- Active parallel wave: Wave 4 validated at `05e7eb0`; deployment packaging ready
 
 ## Phase checklist
 
 - [x] Phase 0 — Repository and contracts
-- [ ] Phase 1 — Execution foundation
-- [ ] Phase 2 — Deterministic policy and risk
-- [ ] Phase 3 — Data, evidence and baselines
-- [ ] Phase 4 — Single-agent baseline
-- [ ] Phase 5 — Bounded multi-agent workflow
-- [ ] Phase 6 — Evaluation and operational readiness
+- [x] Phase 1 — Execution foundation
+- [x] Phase 2 — Deterministic policy and risk
+- [x] Phase 3 — Data, evidence and baselines
+- [x] Phase 4 — Single-agent baseline
+- [x] Phase 5 — Bounded multi-agent workflow
+- [x] Phase 6 — Evaluation and operational readiness
 - [ ] Phase 7 — Development deployment and remote validation
 
 ## Requirement evidence
@@ -47,6 +47,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 | REL-001, REL-002, REL-003, REL-004, REL-007 | Exclusive lease claiming, bounded retry taxonomy, reconciliation cadence, readiness and non-destructive side-effect pause | `tests/reliability/` / AT-017, AT-018, AT-020..AT-022, AT-033, AT-034 | Validated |
 | EXE-010, EXE-011 | Composed evidence-to-recommendation-to-risk-to-fake-paper-fill lifecycle plus rejected no-side-effect path | `tests/integration/test_paper_lifecycle.py` / AT-024, AT-025, AT-035 | Validated |
 | SEC-001, SEC-002, SEC-003, SEC-004, SEC-005 | Immutable role permissions, deny-by-default tools, agent boundary scan, live-mode rejection, injection/redaction and trace gates | `tests/security/` / AT-003, AT-025..AT-028 | Validated |
+| EVA-001, EVA-003, EVA-004, EVA-005 | Deterministic versioned replay aggregation, zero-risk invariant, JSON/Markdown reports and regression gates | `tests/evaluation/` / AT-030, AT-031, AT-032 | Validated |
 
 ## Integrated worker handoffs
 
@@ -69,6 +70,7 @@ Only the lead updates this table after independently validating and integrating 
 | P4-REL-001 | worker-reliability | `668b21d` | REL-001..REL-004, REL-007 / AT-017, AT-018, AT-020..AT-022, AT-033, AT-034 | 12 focused and 138 full tests; Ruff and strict mypy green | Validated |
 | P4-E2E-001 | worker-end-to-end | `94fb014` | EXE-010, EXE-011 / AT-024, AT-025, AT-035 | 3 focused and 141 full tests; manual demo filled 2 shares with one paper submission; Ruff and strict mypy green | Validated |
 | P4-SEC-001 | worker-security | `128b835` | SEC-001..SEC-005 / AT-003, AT-025..AT-028 | 18 focused and 159 full tests; Ruff and strict mypy green | Validated |
+| P4-EVA-001 | worker-evaluation | `05e7eb0` | EVA-001, EVA-003, EVA-004, EVA-005 / AT-030, AT-031, AT-032 | 8 focused and 164 full tests; Ruff and strict mypy green | Validated |
 
 ## Development deployment evidence
 
@@ -164,6 +166,12 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `ruff check .` after P4-SEC-001 | PASS |
 | 2026-11-14 | `mypy src` after P4-SEC-001 | PASS — 78 source files, strict mode |
 | 2026-11-14 | `pytest` after P4-SEC-001 | PASS — 159 tests, 0 failures |
+| 2026-11-14 | `pytest tests/evaluation` | PASS — 8 tests, 0 failures |
+| 2026-11-14 | `ruff check .` after P4-EVA-001 | PASS |
+| 2026-11-14 | `mypy src` after P4-EVA-001 | PASS — 79 source files, strict mode |
+| 2026-11-14 | `uv lock --check` after Wave 4 | PASS — 56 packages resolved |
+| 2026-11-14 | `pytest` complete local acceptance candidate | PASS — 164 tests, 0 failures |
+| 2026-11-14 | fake-paper lifecycle after Wave 4 | PASS — ACCEPTED, FILLED quantity 2, one submission, PAPER only |
 
 ## Decisions and deviations
 
@@ -177,5 +185,5 @@ None recorded.
 
 ## Next action
 
-Integrate and validate P4-EVA-001, run the complete local acceptance gate, then prepare Wave 5 deployment artifacts.
+Implement and validate container, Render Blueprint, migration, smoke and rollback artifacts for exact commit `05e7eb0`.
 

@@ -2,7 +2,7 @@ board_version: 2
 lead:
   owner: lead-codex
   integration_branch: codex/python-phase0
-  validated_commit: 61f10a9
+  validated_commit: 05e7eb0
   contract_version: contracts-v1-python
 
 statuses: [BLOCKED, READY, ACTIVE, REVIEW, MERGED, VALIDATED, SUPERSEDED]
@@ -133,7 +133,7 @@ waves:
         scope: Reliability and failure recovery
       - id: P4-EVA-001
         owner: worker-evaluation
-        status: ACTIVE
+        status: VALIDATED
         requirements: [EVA-001, EVA-003, EVA-004, EVA-005]
         acceptance_tests: [AT-030, AT-031, AT-032]
         scope: Baseline comparison and reports
@@ -150,7 +150,7 @@ waves:
     tasks:
       - id: P5-DPL-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [DPL-001, DPL-002, DPL-003, DPL-004, DPL-005]
         acceptance_tests: [AT-037, AT-038, AT-039]
         scope: Docker packaging, Render Blueprint, migrations and deployment automation
