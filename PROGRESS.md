@@ -4,13 +4,13 @@ Codex must update this file after each completed increment. Do not mark an item 
 
 ## Current status
 
-- Current phase: Wave 4 validated; Wave 5 deployment packaging ready
+- Current phase: Wave 5 deployment packaging complete; exact-commit build and remote deployment blocked externally
 - Active requirement IDs: DPL-001..DPL-010
 - Last successful full build: Wave 4 local acceptance verification passed 2026-11-14 (164 tests, Ruff and strict mypy green)
-- Blocking issues: None
+- Blocking issues: Lead environment has no Docker executable; Render API/deploy credentials, service ID, development URL and test token are not configured
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 5 — development deployment packaging active
+- Active parallel wave: Wave 5 packaging in review; remote deployment access unavailable
 
 ## Phase checklist
 
@@ -48,6 +48,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 | EXE-010, EXE-011 | Composed evidence-to-recommendation-to-risk-to-fake-paper-fill lifecycle plus rejected no-side-effect path | `tests/integration/test_paper_lifecycle.py` / AT-024, AT-025, AT-035 | Validated |
 | SEC-001, SEC-002, SEC-003, SEC-004, SEC-005 | Immutable role permissions, deny-by-default tools, agent boundary scan, live-mode rejection, injection/redaction and trace gates | `tests/security/` / AT-003, AT-025..AT-028 | Validated |
 | EVA-001, EVA-003, EVA-004, EVA-005 | Deterministic versioned replay aggregation, zero-risk invariant, JSON/Markdown reports and regression gates | `tests/evaluation/` / AT-030, AT-031, AT-032 | Validated |
+| DPL-001, DPL-002, DPL-003, DPL-004, DPL-005 | Non-root locked container definition, development Render Blueprint, migration gate, authenticated version/readiness API, smoke and rollback tooling | `tests/deployment/`, `tests/test_api.py` / AT-037..AT-039 | Validated structurally; exact integrated image rebuild pending Docker access |
 
 ## Integrated worker handoffs
 
@@ -71,6 +72,7 @@ Only the lead updates this table after independently validating and integrating 
 | P4-E2E-001 | worker-end-to-end | `94fb014` | EXE-010, EXE-011 / AT-024, AT-025, AT-035 | 3 focused and 141 full tests; manual demo filled 2 shares with one paper submission; Ruff and strict mypy green | Validated |
 | P4-SEC-001 | worker-security | `128b835` | SEC-001..SEC-005 / AT-003, AT-025..AT-028 | 18 focused and 159 full tests; Ruff and strict mypy green | Validated |
 | P4-EVA-001 | worker-evaluation | `05e7eb0` | EVA-001, EVA-003, EVA-004, EVA-005 / AT-030, AT-031, AT-032 | 8 focused and 164 full tests; Ruff and strict mypy green | Validated |
+| P5-DPL-001 | worker-deployment-packaging + lead | `bdf654d` | DPL-001..DPL-005 / AT-037..AT-039 | 8 API/deployment tests and 171 full tests green; current Render spec verified; exact integrated Docker build unavailable | Review |
 
 ## Development deployment evidence
 
@@ -172,6 +174,10 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `uv lock --check` after Wave 4 | PASS — 56 packages resolved |
 | 2026-11-14 | `pytest` complete local acceptance candidate | PASS — 164 tests, 0 failures |
 | 2026-11-14 | fake-paper lifecycle after Wave 4 | PASS — ACCEPTED, FILLED quantity 2, one submission, PAPER only |
+| 2026-11-14 | `pytest tests/test_api.py tests/deployment` | PASS — 8 tests, 0 failures |
+| 2026-11-14 | `ruff check .`, `mypy src`, `pytest` after deployment runtime gates | PASS — 171 tests, 0 failures |
+| 2026-11-14 | exact integrated Docker build for `bdf654d` | BLOCKED — `docker` executable unavailable in lead environment |
+| 2026-11-14 | Render access audit | BLOCKED — API key/deploy hook, service ID, base URL and development test token all missing |
 
 ## Decisions and deviations
 
@@ -182,8 +188,10 @@ None recorded.
 ## Known limitations
 
 - Docker is not currently available locally. Alembic PostgreSQL SQL generation is validated; applying migrations to a real PostgreSQL service remains required in the broader integration and deployment gates.
+- The deployment worker built and smoked its worker commit image, but the lead cannot rebuild the exact integrated commit because Docker is absent.
+- Render deployment and AT-040 through AT-043 cannot run until development project access and secrets are configured.
 
 ## Next action
 
-Integrate and validate P5-DPL-001, then determine configured Render access for exact-commit deployment and remote gates.
+Push the designated development branch, then obtain Render development access plus Docker/build capability to deploy exact commit `bdf654d10d64c5293ad99691b560aaac8909e5a6` and run AT-040 through AT-043.
 
