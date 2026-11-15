@@ -4,13 +4,13 @@ Codex must update this file after each completed increment. Do not mark an item 
 
 ## Current status
 
-- Current phase: Phase 1 / Wave 1 ready
+- Current phase: Phase 1 / Wave 1 active
 - Active requirement IDs: EXE-001, EXE-003, EXE-004, RSK-001, RSK-002, RSK-005, RSK-008, RSK-009, DAT-001..DAT-004, OBS-001, OBS-002, OBS-004, SEC-004
 - Last successful full build: Python foundation verification passed 2026-11-14 (11 tests, Ruff and strict mypy green)
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 1 ready
+- Active parallel wave: Wave 1 — execution, risk and evidence workers active
 
 ## Phase checklist
 
@@ -87,5 +87,5 @@ None recorded.
 
 ## Next action
 
-Commit the validated Python foundation, create isolated Wave 1 worktrees, and implement execution, risk, evidence and observability slices.
+Integrate and independently validate the active execution, risk and evidence handoffs, then dispatch the observability slice from the validated integration commit.
 
