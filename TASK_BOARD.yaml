@@ -46,7 +46,7 @@ waves:
         scope: Deterministic policy and risk rules
       - id: P1-DATA-001
         owner: worker-data
-        status: ACTIVE
+        status: VALIDATED
         requirements: [DAT-001, DAT-002, DAT-003, DAT-004]
         acceptance_tests: [AT-029]
         scope: Evidence provenance, indicators and fixtures
