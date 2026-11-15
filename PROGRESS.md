@@ -45,6 +45,8 @@ Codex must update this file after each completed increment. Do not mark an item 
 | REC-003, REC-004, REC-005, REC-007 | Deterministic multi-agent portfolio synthesis with complete proposal, conflict containment and no execution authority | `tests/agents/portfolio/test_synthesis.py` / AT-009 | Validated |
 | COR-002, COR-003, COR-004, COR-006, COR-007 | Fixed checkpointed DAG with shared budgets, one revision, risk-before-execution and public restart recovery | `tests/coordinator/test_coordinator.py` / AT-007, AT-033 | Validated |
 | REL-001, REL-002, REL-003, REL-004, REL-007 | Exclusive lease claiming, bounded retry taxonomy, reconciliation cadence, readiness and non-destructive side-effect pause | `tests/reliability/` / AT-017, AT-018, AT-020..AT-022, AT-033, AT-034 | Validated |
+| EXE-010, EXE-011 | Composed evidence-to-recommendation-to-risk-to-fake-paper-fill lifecycle plus rejected no-side-effect path | `tests/integration/test_paper_lifecycle.py` / AT-024, AT-025, AT-035 | Validated |
+| SEC-001, SEC-002, SEC-003, SEC-004, SEC-005 | Immutable role permissions, deny-by-default tools, agent boundary scan, live-mode rejection, injection/redaction and trace gates | `tests/security/` / AT-003, AT-025..AT-028 | Validated |
 
 ## Integrated worker handoffs
 
@@ -65,6 +67,8 @@ Only the lead updates this table after independently validating and integrating 
 | P3-PORTFOLIO-001 | worker-portfolio-agent | `d2c941c` | REC-003, REC-004, REC-005, REC-007 / AT-009 | 8 focused and 118 full tests; Ruff and strict mypy green | Validated |
 | P3-COR-001 | worker-coordinator | `61f10a9` | COR-002, COR-003, COR-004, COR-006, COR-007 / AT-007, AT-033 | 8 focused and 126 full tests; Ruff and strict mypy green | Validated |
 | P4-REL-001 | worker-reliability | `668b21d` | REL-001..REL-004, REL-007 / AT-017, AT-018, AT-020..AT-022, AT-033, AT-034 | 12 focused and 138 full tests; Ruff and strict mypy green | Validated |
+| P4-E2E-001 | worker-end-to-end | `94fb014` | EXE-010, EXE-011 / AT-024, AT-025, AT-035 | 3 focused and 141 full tests; manual demo filled 2 shares with one paper submission; Ruff and strict mypy green | Validated |
+| P4-SEC-001 | worker-security | `128b835` | SEC-001..SEC-005 / AT-003, AT-025..AT-028 | 18 focused and 159 full tests; Ruff and strict mypy green | Validated |
 
 ## Development deployment evidence
 
@@ -154,6 +158,12 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `ruff check src/stock_agent/reliability tests/reliability` | PASS |
 | 2026-11-14 | `mypy src` after P4-REL-001 | PASS — 70 source files, strict mode |
 | 2026-11-14 | `pytest` after P4-REL-001 | PASS — 138 tests, 0 failures |
+| 2026-11-14 | `pytest tests/integration` | PASS — 3 tests, 0 failures |
+| 2026-11-14 | `python -m stock_agent.application.demo` | PASS — ACCEPTED, BUY, risk approved, one paper submission, FILLED quantity 2 |
+| 2026-11-14 | `pytest tests/security` | PASS — 18 tests, 0 failures |
+| 2026-11-14 | `ruff check .` after P4-SEC-001 | PASS |
+| 2026-11-14 | `mypy src` after P4-SEC-001 | PASS — 78 source files, strict mode |
+| 2026-11-14 | `pytest` after P4-SEC-001 | PASS — 159 tests, 0 failures |
 
 ## Decisions and deviations
 

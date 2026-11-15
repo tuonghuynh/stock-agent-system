@@ -121,7 +121,7 @@ waves:
     tasks:
       - id: P4-E2E-001
         owner: worker-end-to-end
-        status: ACTIVE
+        status: VALIDATED
         requirements: [EXE-010, EXE-011]
         acceptance_tests: [AT-024, AT-025, AT-035]
         scope: End-to-end accepted and rejected paths
@@ -139,7 +139,7 @@ waves:
         scope: Baseline comparison and reports
       - id: P4-SEC-001
         owner: worker-security
-        status: ACTIVE
+        status: VALIDATED
         requirements: [SEC-001, SEC-002, SEC-003, SEC-004, SEC-005]
         acceptance_tests: [AT-003, AT-025, AT-026, AT-027, AT-028]
         scope: Security, injection and trace validation
