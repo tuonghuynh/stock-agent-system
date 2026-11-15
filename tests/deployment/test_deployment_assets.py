@@ -28,14 +28,17 @@ def test_at038_render_blueprint_is_development_paper_only_and_secret_safe() -> N
     service = blueprint["services"][0]
     assert service["type"] == "web"
     assert service["runtime"] == "docker"
+    assert service["plan"] == "0.5c-512mb"
     assert service["numInstances"] == 1
     assert service["healthCheckPath"] == "/health/ready"
     assert service["preDeployCommand"] == "./scripts/deployment/predeploy.sh"
     assert service["autoDeployTrigger"] == "checksPass"
     env = {item["key"]: item for item in service["envVars"]}
+    assert "GIT_SHA" not in env
     assert env["ENVIRONMENT"]["value"] == "development"
     assert env["BROKER_MODE"]["value"] == "FAKE"
     assert env["LIVE_TRADING_ENABLED"]["value"] == "false"
+    assert env["REQUIRE_DATABASE_READINESS"]["value"] == "true"
     assert env["DATABASE_URL"]["fromDatabase"]["property"] == "connectionString"
     for secret in (
         "DEV_TEST_TOKEN",
@@ -44,6 +47,7 @@ def test_at038_render_blueprint_is_development_paper_only_and_secret_safe() -> N
         "ALPACA_PAPER_SECRET",
     ):
         assert env[secret] == {"key": secret, "sync": False}
+    assert blueprint["databases"][0]["plan"] == "0.1c-256mb"
     rendered = (ROOT / "render.yaml").read_text(encoding="utf-8").lower()
     assert "api.alpaca.markets" not in rendered
     assert "password:" not in rendered

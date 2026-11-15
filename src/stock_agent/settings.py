@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-from pydantic import Field, model_validator
+from pydantic import AliasChoices, Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -19,6 +19,11 @@ class Settings(BaseSettings):
     policy_path: str = "POLICY_V1.yaml"
     release_manifest_path: str = "release-manifest.yaml"
     dev_test_token: str | None = Field(default=None, repr=False)
+    git_sha: str = Field(
+        default="unknown",
+        validation_alias=AliasChoices("GIT_SHA", "RENDER_GIT_COMMIT"),
+    )
+    require_database_readiness: bool = False
 
     @model_validator(mode="after")
     def reject_live_trading(self) -> "Settings":

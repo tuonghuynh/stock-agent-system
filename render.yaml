@@ -2,7 +2,7 @@ services:
   - type: web
     name: stock-agent-system-dev
     runtime: docker
-    plan: starter
+    plan: 0.5c-512mb
     region: oregon
     numInstances: 1
     dockerfilePath: ./Dockerfile
@@ -18,17 +18,14 @@ services:
         value: FAKE
       - key: LIVE_TRADING_ENABLED
         value: "false"
+      - key: REQUIRE_DATABASE_READINESS
+        value: "true"
       - key: POLICY_PATH
         value: POLICY_V1.yaml
       - key: RELEASE_MANIFEST_PATH
         value: release-manifest.yaml
       - key: RELEASE_VERSION
         value: release-v1
-      - key: GIT_SHA
-        fromService:
-          type: web
-          name: stock-agent-system-dev
-          envVarKey: RENDER_GIT_COMMIT
       - key: DATABASE_URL
         fromDatabase:
           name: stock-agent-system-dev-db
@@ -44,7 +41,7 @@ services:
 
 databases:
   - name: stock-agent-system-dev-db
-    plan: basic-256mb
+    plan: 0.1c-256mb
     region: oregon
     postgresMajorVersion: "18"
     databaseName: stock_agent_dev
