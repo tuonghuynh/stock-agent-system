@@ -10,7 +10,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 4 validated at `05e7eb0`; deployment packaging ready
+- Active parallel wave: Wave 5 — development deployment packaging active
 
 ## Phase checklist
 
@@ -185,5 +185,5 @@ None recorded.
 
 ## Next action
 
-Implement and validate container, Render Blueprint, migration, smoke and rollback artifacts for exact commit `05e7eb0`.
+Integrate and validate P5-DPL-001, then determine configured Render access for exact-commit deployment and remote gates.
 

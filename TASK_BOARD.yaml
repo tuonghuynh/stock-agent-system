@@ -149,8 +149,8 @@ waves:
     integration_gate: exact commit deployed; AT-037 through AT-043 green; rollback proven
     tasks:
       - id: P5-DPL-001
-        owner: unassigned
-        status: READY
+        owner: worker-deployment-packaging
+        status: ACTIVE
         requirements: [DPL-001, DPL-002, DPL-003, DPL-004, DPL-005]
         acceptance_tests: [AT-037, AT-038, AT-039]
         scope: Docker packaging, Render Blueprint, migrations and deployment automation
