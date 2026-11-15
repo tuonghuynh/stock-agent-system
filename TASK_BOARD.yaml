@@ -34,7 +34,7 @@ waves:
     tasks:
       - id: P1-EXEC-001
         owner: worker-execution
-        status: ACTIVE
+        status: VALIDATED
         requirements: [EXE-001, EXE-003, EXE-004]
         acceptance_tests: [AT-016]
         scope: Execution state, idempotency and fake broker
