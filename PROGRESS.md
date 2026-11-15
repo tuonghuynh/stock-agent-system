@@ -10,7 +10,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 3 — research, critic and portfolio role slices active
+- Active parallel wave: Wave 3 — role slices validated; coordinator active
 
 ## Phase checklist
 
@@ -154,5 +154,5 @@ None recorded.
 
 ## Next action
 
-Integrate and validate the active research, critic and portfolio slices, then dispatch the coordinator from the next green commit.
+Integrate and validate P3-COR-001, then run the Wave 3 integration gate and open Wave 4.
 
