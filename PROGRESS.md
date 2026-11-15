@@ -4,13 +4,13 @@ Codex must update this file after each completed increment. Do not mark an item 
 
 ## Current status
 
-- Current phase: Wave 2 validated; Wave 3 ready
-- Active requirement IDs: COR-002..COR-007, AGT-001, AGT-002, AGT-005, REC-003..REC-007
-- Last successful full build: Wave 2 integration verification passed 2026-11-14 (92 tests, Ruff and strict mypy green)
+- Current phase: Wave 3 validated; Wave 4 ready
+- Active requirement IDs: EXE-010, EXE-011, REL-001..REL-004, REL-007, EVA-001, EVA-003..EVA-005, SEC-001..SEC-005
+- Last successful full build: Wave 3 integration verification passed 2026-11-14 (126 tests, Ruff and strict mypy green)
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 3 — role slices validated; coordinator active
+- Active parallel wave: Wave 3 validated at `61f10a9`; Wave 4 ready for dispatch
 
 ## Phase checklist
 
@@ -43,6 +43,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 | COR-005, REC-006 | Independent deterministic critic with material objections, bounded dispositions and no execution authority | `tests/agents/critic/test_critic.py` / AT-008 | Validated |
 | AGT-001, AGT-002, AGT-005 | Five-dimension evidence-linked research agent with opaque references, immutable findings and safe WAIT | `tests/agents/research/test_research_agent.py` / AT-004, AT-006 | Validated |
 | REC-003, REC-004, REC-005, REC-007 | Deterministic multi-agent portfolio synthesis with complete proposal, conflict containment and no execution authority | `tests/agents/portfolio/test_synthesis.py` / AT-009 | Validated |
+| COR-002, COR-003, COR-004, COR-006, COR-007 | Fixed checkpointed DAG with shared budgets, one revision, risk-before-execution and public restart recovery | `tests/coordinator/test_coordinator.py` / AT-007, AT-033 | Validated |
 
 ## Integrated worker handoffs
 
@@ -61,6 +62,7 @@ Only the lead updates this table after independently validating and integrating 
 | P3-CRITIC-001 | worker-critic-agent | `4bb15b9` | COR-005, REC-006 / AT-008 | 8 focused and 100 full tests; Ruff and strict mypy green | Validated |
 | P3-RESEARCH-001 | worker-research-agent | `2f2d656` | AGT-001, AGT-002, AGT-005 / AT-004, AT-006 | 10 focused and 110 full tests; Ruff and strict mypy green | Validated |
 | P3-PORTFOLIO-001 | worker-portfolio-agent | `d2c941c` | REC-003, REC-004, REC-005, REC-007 / AT-009 | 8 focused and 118 full tests; Ruff and strict mypy green | Validated |
+| P3-COR-001 | worker-coordinator | `61f10a9` | COR-002, COR-003, COR-004, COR-006, COR-007 / AT-007, AT-033 | 8 focused and 126 full tests; Ruff and strict mypy green | Validated |
 
 ## Development deployment evidence
 
@@ -141,6 +143,11 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `ruff check .` after P3-PORTFOLIO-001 | PASS |
 | 2026-11-14 | `mypy src` after P3-PORTFOLIO-001 | PASS — 60 source files, strict mode |
 | 2026-11-14 | `pytest` after P3-PORTFOLIO-001 | PASS — 118 tests, 0 failures |
+| 2026-11-14 | `pytest tests/coordinator` | PASS — 8 tests, 0 failures |
+| 2026-11-14 | `ruff check .` after P3-COR-001 | PASS |
+| 2026-11-14 | `mypy src` after P3-COR-001 | PASS — 63 source files, strict mode |
+| 2026-11-14 | `pytest` after P3-COR-001 | PASS — 126 tests, 0 failures |
+| 2026-11-14 | `uv lock --check` after Wave 3 | PASS — 56 packages resolved |
 
 ## Decisions and deviations
 
@@ -154,5 +161,5 @@ None recorded.
 
 ## Next action
 
-Integrate and validate P3-COR-001, then run the Wave 3 integration gate and open Wave 4.
+Create Wave 4 worktrees from validated commit `61f10a9` and implement end-to-end, reliability, evaluation and security gates.
 

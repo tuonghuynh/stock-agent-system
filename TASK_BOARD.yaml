@@ -2,7 +2,7 @@ board_version: 2
 lead:
   owner: lead-codex
   integration_branch: codex/python-phase0
-  validated_commit: eb01d58
+  validated_commit: 61f10a9
   contract_version: contracts-v1-python
 
 statuses: [BLOCKED, READY, ACTIVE, REVIEW, MERGED, VALIDATED, SUPERSEDED]
@@ -92,7 +92,7 @@ waves:
     tasks:
       - id: P3-COR-001
         owner: worker-coordinator
-        status: ACTIVE
+        status: VALIDATED
         requirements: [COR-002, COR-003, COR-004, COR-006, COR-007]
         acceptance_tests: [AT-007, AT-033]
         scope: Coordinator DAG, budgets and recovery
@@ -121,25 +121,25 @@ waves:
     tasks:
       - id: P4-E2E-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [EXE-010, EXE-011]
         acceptance_tests: [AT-024, AT-025, AT-035]
         scope: End-to-end accepted and rejected paths
       - id: P4-REL-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [REL-001, REL-002, REL-003, REL-004, REL-007]
         acceptance_tests: [AT-017, AT-018, AT-020, AT-021, AT-022, AT-033, AT-034]
         scope: Reliability and failure recovery
       - id: P4-EVA-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [EVA-001, EVA-003, EVA-004, EVA-005]
         acceptance_tests: [AT-030, AT-031, AT-032]
         scope: Baseline comparison and reports
       - id: P4-SEC-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [SEC-001, SEC-002, SEC-003, SEC-004, SEC-005]
         acceptance_tests: [AT-003, AT-025, AT-026, AT-027, AT-028]
         scope: Security, injection and trace validation
