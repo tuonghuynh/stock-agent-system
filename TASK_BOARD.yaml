@@ -63,7 +63,7 @@ waves:
     tasks:
       - id: P2-EXEC-001
         owner: worker-execution-recovery
-        status: ACTIVE
+        status: VALIDATED
         requirements: [EXE-002, EXE-005, EXE-006, EXE-007, EXE-008, EXE-009]
         acceptance_tests: [AT-017, AT-018, AT-019, AT-020, AT-021, AT-022, AT-036]
         scope: Alpaca paper adapter and execution recovery
