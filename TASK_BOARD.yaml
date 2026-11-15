@@ -69,7 +69,7 @@ waves:
         scope: Alpaca paper adapter and execution recovery
       - id: P2-RISK-001
         owner: worker-risk-concurrency
-        status: ACTIVE
+        status: VALIDATED
         requirements: [RSK-003, RSK-004, RSK-010, REL-005, REL-006]
         acceptance_tests: [AT-010, AT-013, AT-014, AT-023]
         scope: Reservations, concurrency, freshness and pause

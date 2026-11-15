@@ -36,6 +36,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 | EXE-001, EXE-003, EXE-004 | Paper-only broker boundary, explicit state machine, canonical idempotency, persist-before-submit and atomic duplicate suppression | `tests/execution/test_execution.py` / AT-016 | Validated |
 | DAT-001, DAT-002, DAT-003, DAT-004 | Immutable canonical evidence snapshots, provenance/freshness states, point-in-time boundaries and Decimal SMA/EMA/Wilder RSI | `tests/evidence/` / AT-029 boundary | Validated |
 | OBS-001, OBS-002, OBS-004, SEC-004 | Append-only audit, linked trace/version context, recursive redaction and frozen hostile-content authority | `tests/observability/` / AT-003, AT-027, AT-028 | Validated |
+| RSK-003, RSK-004, RSK-010, REL-005, REL-006 | Atomic cash/share reservations, material-input freshness, pending exposure and latched safety pause | `tests/risk/test_reservations.py`, `test_freshness_pause_authorization.py` / AT-010, AT-013, AT-014, AT-023 | Validated |
 
 ## Integrated worker handoffs
 
@@ -47,6 +48,7 @@ Only the lead updates this table after independently validating and integrating 
 | P1-EXEC-001 | worker-execution | `d9985c5` | EXE-001, EXE-003, EXE-004 / AT-016 | 6 focused and 26 full tests; Ruff and strict mypy green | Validated |
 | P1-DATA-001 | worker-data | `c0fa5c1` | DAT-001, DAT-002, DAT-003, DAT-004 / AT-029 boundary | 8 focused and 34 full tests; Ruff and strict mypy green | Validated |
 | P1-OBS-001 | worker-observability | `8502e4e` | OBS-001, OBS-002, OBS-004, SEC-004 / AT-003, AT-027, AT-028 | 8 focused and 42 full tests; Ruff and strict mypy green | Validated |
+| P2-RISK-001 | worker-risk-concurrency | `1c749ce` | RSK-003, RSK-004, RSK-010, REL-005, REL-006 / AT-010, AT-013, AT-014, AT-023 | 22 focused and 55 full tests; Ruff and strict mypy green | Validated |
 
 ## Development deployment evidence
 
@@ -98,6 +100,10 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `mypy src` after P1-OBS-001 integration | PASS — 35 source files, strict mode |
 | 2026-11-14 | `pytest` after P1-OBS-001 integration | PASS — 42 tests, 0 failures |
 | 2026-11-14 | `uv lock --check` and Wave 1 integration gate | PASS — lock valid; 27 cross-module gate tests passed |
+| 2026-11-14 | `pytest tests/risk` after P2-RISK-001 | PASS — 22 tests, 0 failures |
+| 2026-11-14 | `ruff check src/stock_agent/risk tests/risk` | PASS |
+| 2026-11-14 | `mypy src` after P2-RISK-001 | PASS — 39 source files, strict mode |
+| 2026-11-14 | `pytest` after P2-RISK-001 | PASS — 55 tests, 0 failures |
 
 ## Decisions and deviations
 
