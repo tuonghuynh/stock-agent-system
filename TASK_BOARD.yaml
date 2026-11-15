@@ -2,7 +2,7 @@ board_version: 2
 lead:
   owner: lead-codex
   integration_branch: codex/python-phase0
-  validated_commit: pending-foundation-commit
+  validated_commit: 74128d948ec24597f533a31c2d0fc479ba5b7cae
   contract_version: contracts-v1-python
 
 statuses: [BLOCKED, READY, ACTIVE, REVIEW, MERGED, VALIDATED, SUPERSEDED]
