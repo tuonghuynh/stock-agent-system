@@ -40,7 +40,7 @@ waves:
         scope: Execution state, idempotency and fake broker
       - id: P1-RISK-001
         owner: worker-risk
-        status: ACTIVE
+        status: VALIDATED
         requirements: [RSK-001, RSK-002, RSK-005, RSK-008, RSK-009]
         acceptance_tests: [AT-011, AT-012, AT-015]
         scope: Deterministic policy and risk rules
