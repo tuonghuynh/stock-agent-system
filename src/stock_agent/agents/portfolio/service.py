@@ -26,9 +26,20 @@ class PortfolioSynthesizer:
 
     def synthesize(self, inputs: PortfolioSynthesisInput) -> PortfolioSynthesisResult:
         draft = inputs.draft
+        contradictory_overlap = set(draft.supporting_evidence_ids) & set(
+            draft.contradicting_evidence_ids
+        )
+        overlap_conflicts = tuple(
+            f"Evidence {evidence_id} is both supporting and contradicting"
+            for evidence_id in sorted(contradictory_overlap, key=lambda item: item.hex)
+        )
         conflicts = tuple(
             dict.fromkeys(
-                (*draft.material_conflicts, *inputs.critique.unresolved_material_conflicts)
+                (
+                    *draft.material_conflicts,
+                    *inputs.critique.unresolved_material_conflicts,
+                    *overlap_conflicts,
+                )
             )
         )
         if not inputs.material_data_complete:

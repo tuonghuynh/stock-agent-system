@@ -55,6 +55,7 @@ def synthesis_input(
     symbol: str = "AAPL",
     draft_symbol: str = "AAPL",
     target: str = "4",
+    contradictory: bool = False,
 ) -> PortfolioSynthesisInput:
     return PortfolioSynthesisInput(
         run_id=RUN_ID,
@@ -93,7 +94,7 @@ def synthesis_input(
             base_case="Growth remains durable",
             bear_case="Valuation compresses",
             supporting_evidence_ids=(EVIDENCE_ID,),
-            contradicting_evidence_ids=(EVIDENCE_ID,),
+            contradicting_evidence_ids=(EVIDENCE_ID,) if contradictory else (),
             material_conflicts=(),
             invalidation_conditions=("Revenue growth turns negative",),
             confidence=confidence,
@@ -118,7 +119,7 @@ def test_rec003_rec005_complete_multi_agent_proposal_is_deterministic() -> None:
     assert recommendation.target_weight == Decimal("4")
     assert recommendation.expires_at == NOW + timedelta(hours=20)
     assert recommendation.bull_case and recommendation.base_case and recommendation.bear_case
-    assert recommendation.contradicting_evidence_ids == (EVIDENCE_ID,)
+    assert recommendation.contradicting_evidence_ids == ()
     assert recommendation.invalidation_conditions
     assert recommendation.entry_conditions and recommendation.exit_conditions
     assert first.policy_version == "1"
@@ -169,6 +170,16 @@ def test_untrusted_draft_cannot_change_symbol_or_exceed_target_bound() -> None:
         synthesis_input(draft_symbol="TSLA")
     with pytest.raises(ValidationError, match="exceeds its proposal bound"):
         synthesis_input(target="11")
+
+
+def test_same_evidence_cannot_support_and_contradict_an_eligible_trade() -> None:
+    result = PortfolioSynthesizer().synthesize(synthesis_input(contradictory=True))
+
+    assert result.recommendation.action is RecommendationAction.NEEDS_REVIEW
+    assert result.recommendation.status is RecommendationStatus.INELIGIBLE
+    assert result.recommendation.target_weight == result.recommendation.current_weight
+    assert "both supporting and contradicting" in result.recommendation.material_conflicts[0]
+    assert result.execution_authorized is False
 
 
 def test_research_must_match_frozen_run_timestamp_and_evidence() -> None:
