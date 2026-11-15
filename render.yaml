@@ -1,0 +1,52 @@
+services:
+  - type: web
+    name: stock-agent-system-dev
+    runtime: docker
+    plan: starter
+    region: oregon
+    numInstances: 1
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    preDeployCommand: ./scripts/deployment/predeploy.sh
+    healthCheckPath: /health/ready
+    maxShutdownDelaySeconds: 60
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: ENVIRONMENT
+        value: development
+      - key: BROKER_MODE
+        value: FAKE
+      - key: LIVE_TRADING_ENABLED
+        value: "false"
+      - key: POLICY_PATH
+        value: POLICY_V1.yaml
+      - key: RELEASE_MANIFEST_PATH
+        value: release-manifest.yaml
+      - key: RELEASE_VERSION
+        value: release-v1
+      - key: GIT_SHA
+        fromService:
+          type: web
+          name: stock-agent-system-dev
+          envVarKey: RENDER_GIT_COMMIT
+      - key: DATABASE_URL
+        fromDatabase:
+          name: stock-agent-system-dev-db
+          property: connectionString
+      - key: DEV_TEST_TOKEN
+        sync: false
+      - key: MODEL_API_KEY
+        sync: false
+      - key: ALPACA_PAPER_KEY
+        sync: false
+      - key: ALPACA_PAPER_SECRET
+        sync: false
+
+databases:
+  - name: stock-agent-system-dev-db
+    plan: basic-256mb
+    region: oregon
+    postgresMajorVersion: "18"
+    databaseName: stock_agent_dev
+    user: stock_agent_dev
+    ipAllowList: []
