@@ -38,6 +38,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 | OBS-001, OBS-002, OBS-004, SEC-004 | Append-only audit, linked trace/version context, recursive redaction and frozen hostile-content authority | `tests/observability/` / AT-003, AT-027, AT-028 | Validated |
 | RSK-003, RSK-004, RSK-010, REL-005, REL-006 | Atomic cash/share reservations, material-input freshness, pending exposure and latched safety pause | `tests/risk/test_reservations.py`, `test_freshness_pause_authorization.py` / AT-010, AT-013, AT-014, AT-023 | Validated |
 | EXE-002, EXE-005, EXE-006, EXE-007, EXE-008, EXE-009 | Paper-only Alpaca boundary, ambiguity/restart recovery, fills, cancel races, reconciliation and deterministic pricing | `tests/execution/test_recovery_and_alpaca.py` / AT-017..AT-022, AT-036 | Validated |
+| REC-001, EVA-001, EVA-002 | Deterministic five-factor rules baseline and identical-snapshot three-variant comparison boundary | `tests/baseline/`, `tests/evaluation/` / AT-029, AT-030 | Validated |
 
 ## Integrated worker handoffs
 
@@ -51,6 +52,7 @@ Only the lead updates this table after independently validating and integrating 
 | P1-OBS-001 | worker-observability | `8502e4e` | OBS-001, OBS-002, OBS-004, SEC-004 / AT-003, AT-027, AT-028 | 8 focused and 42 full tests; Ruff and strict mypy green | Validated |
 | P2-RISK-001 | worker-risk-concurrency | `1c749ce` | RSK-003, RSK-004, RSK-010, REL-005, REL-006 / AT-010, AT-013, AT-014, AT-023 | 22 focused and 55 full tests; Ruff and strict mypy green | Validated |
 | P2-EXEC-001 | worker-execution-recovery | `a5127ee` | EXE-002, EXE-005..EXE-009 / AT-017..AT-022, AT-036 | 23 focused and 72 full tests; Ruff and strict mypy green | Validated |
+| P2-BASE-001 | worker-baseline | `97777d6` | REC-001, EVA-001, EVA-002 / AT-029, AT-030 | 8 focused and 80 full tests; Ruff and strict mypy green | Validated |
 
 ## Development deployment evidence
 
@@ -110,6 +112,10 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `ruff check src/stock_agent/execution tests/execution` | PASS |
 | 2026-11-14 | `mypy src` after P2-EXEC-001 | PASS — 42 source files, strict mode |
 | 2026-11-14 | `pytest` after P2-EXEC-001 | PASS — 72 tests, 0 failures |
+| 2026-11-14 | `pytest tests/baseline tests/evaluation` | PASS — 8 tests, 0 failures |
+| 2026-11-14 | `ruff check src tests` after P2-BASE-001 | PASS |
+| 2026-11-14 | `mypy src` after P2-BASE-001 | PASS — 47 source files, strict mode |
+| 2026-11-14 | `pytest` after P2-BASE-001 | PASS — 80 tests, 0 failures |
 
 ## Decisions and deviations
 

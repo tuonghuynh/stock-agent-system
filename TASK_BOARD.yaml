@@ -75,7 +75,7 @@ waves:
         scope: Reservations, concurrency, freshness and pause
       - id: P2-BASE-001
         owner: worker-baseline
-        status: ACTIVE
+        status: VALIDATED
         requirements: [REC-001, EVA-001, EVA-002]
         acceptance_tests: [AT-029, AT-030]
         scope: Rules baseline and point-in-time cases
