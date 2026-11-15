@@ -97,20 +97,20 @@ waves:
         acceptance_tests: [AT-007, AT-033]
         scope: Coordinator DAG, budgets and recovery
       - id: P3-RESEARCH-001
-        owner: unassigned
-        status: READY
+        owner: worker-research-agent
+        status: ACTIVE
         requirements: [AGT-001, AGT-002, AGT-005]
         acceptance_tests: [AT-004, AT-006]
         scope: Research Agent
       - id: P3-CRITIC-001
-        owner: unassigned
-        status: READY
+        owner: worker-critic-agent
+        status: ACTIVE
         requirements: [COR-005, REC-006]
         acceptance_tests: [AT-008]
         scope: Independent Critic Agent
       - id: P3-PORTFOLIO-001
-        owner: unassigned
-        status: READY
+        owner: worker-portfolio-agent
+        status: ACTIVE
         requirements: [REC-003, REC-004, REC-005, REC-007]
         acceptance_tests: [AT-009]
         scope: Portfolio Agent and target-position proposal

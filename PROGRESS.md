@@ -10,7 +10,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 2 validated at `eb01d58`; Wave 3 ready for dispatch
+- Active parallel wave: Wave 3 — research, critic and portfolio role slices active
 
 ## Phase checklist
 
@@ -136,5 +136,5 @@ None recorded.
 
 ## Next action
 
-Create Wave 3 worktrees from validated commit `eb01d58` and implement coordinator, research, critic and portfolio slices.
+Integrate and validate the active research, critic and portfolio slices, then dispatch the coordinator from the next green commit.
 
