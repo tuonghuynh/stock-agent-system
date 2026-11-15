@@ -4,13 +4,13 @@ Codex must update this file after each completed increment. Do not mark an item 
 
 ## Current status
 
-- Current phase: Phase 1 / Wave 1 active
-- Active requirement IDs: EXE-001, EXE-003, EXE-004, RSK-001, RSK-002, RSK-005, RSK-008, RSK-009, DAT-001..DAT-004, OBS-001, OBS-002, OBS-004, SEC-004
-- Last successful full build: Python foundation verification passed 2026-11-14 (11 tests, Ruff and strict mypy green)
+- Current phase: Wave 1 validated; Wave 2 ready
+- Active requirement IDs: EXE-002, EXE-005..EXE-009, RSK-003, RSK-004, RSK-010, REL-005, REL-006, REC-001, EVA-001, EVA-002, AGT-002..AGT-004, REC-002
+- Last successful full build: Wave 1 integration verification passed 2026-11-14 (42 tests, Ruff and strict mypy green)
 - Blocking issues: None
 - Integration branch: `codex/python-phase0`
 - Frozen contract version: `contracts-v1-python`
-- Active parallel wave: Wave 1 — execution, risk and evidence validated; observability active
+- Active parallel wave: Wave 1 validated at `8502e4e`; Wave 2 ready for dispatch
 
 ## Phase checklist
 
@@ -35,6 +35,7 @@ Codex must update this file after each completed increment. Do not mark an item 
 | RSK-001, RSK-002, RSK-005, RSK-008, RSK-009 | Deterministic 14-rule paper-only risk engine with rule-level evidence, exposure limits, grandfathering and earnings blackout | `tests/risk/test_engine.py` / AT-011, AT-012, AT-015 | Validated |
 | EXE-001, EXE-003, EXE-004 | Paper-only broker boundary, explicit state machine, canonical idempotency, persist-before-submit and atomic duplicate suppression | `tests/execution/test_execution.py` / AT-016 | Validated |
 | DAT-001, DAT-002, DAT-003, DAT-004 | Immutable canonical evidence snapshots, provenance/freshness states, point-in-time boundaries and Decimal SMA/EMA/Wilder RSI | `tests/evidence/` / AT-029 boundary | Validated |
+| OBS-001, OBS-002, OBS-004, SEC-004 | Append-only audit, linked trace/version context, recursive redaction and frozen hostile-content authority | `tests/observability/` / AT-003, AT-027, AT-028 | Validated |
 
 ## Integrated worker handoffs
 
@@ -45,6 +46,7 @@ Only the lead updates this table after independently validating and integrating 
 | P1-RISK-001 | worker-risk | `f148085` | RSK-001, RSK-002, RSK-005, RSK-008, RSK-009 / AT-011, AT-012, AT-015 | 9 focused and 20 full tests; Ruff and strict mypy green | Validated |
 | P1-EXEC-001 | worker-execution | `d9985c5` | EXE-001, EXE-003, EXE-004 / AT-016 | 6 focused and 26 full tests; Ruff and strict mypy green | Validated |
 | P1-DATA-001 | worker-data | `c0fa5c1` | DAT-001, DAT-002, DAT-003, DAT-004 / AT-029 boundary | 8 focused and 34 full tests; Ruff and strict mypy green | Validated |
+| P1-OBS-001 | worker-observability | `8502e4e` | OBS-001, OBS-002, OBS-004, SEC-004 / AT-003, AT-027, AT-028 | 8 focused and 42 full tests; Ruff and strict mypy green | Validated |
 
 ## Development deployment evidence
 
@@ -91,6 +93,11 @@ Record the exact command, result and relevant failure summary. Do not paste secr
 | 2026-11-14 | `ruff check src/stock_agent/evidence tests/evidence` | PASS |
 | 2026-11-14 | `mypy src` after P1-DATA-001 integration | PASS — 31 source files, strict mode |
 | 2026-11-14 | `pytest` after P1-DATA-001 integration | PASS — 34 tests, 0 failures |
+| 2026-11-14 | `pytest tests/observability` | PASS — 8 tests, 0 failures |
+| 2026-11-14 | `ruff check .` after P1-OBS-001 integration | PASS |
+| 2026-11-14 | `mypy src` after P1-OBS-001 integration | PASS — 35 source files, strict mode |
+| 2026-11-14 | `pytest` after P1-OBS-001 integration | PASS — 42 tests, 0 failures |
+| 2026-11-14 | `uv lock --check` and Wave 1 integration gate | PASS — lock valid; 27 cross-module gate tests passed |
 
 ## Decisions and deviations
 
@@ -104,5 +111,5 @@ None recorded.
 
 ## Next action
 
-Integrate and independently validate P1-OBS-001, then run the Wave 1 integration gate and freeze the next validated commit.
+Create Wave 2 worktrees from validated commit `8502e4e` and implement execution recovery, reservation concurrency, rules baseline and structured model-output boundary.
 

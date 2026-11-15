@@ -2,7 +2,7 @@ board_version: 2
 lead:
   owner: lead-codex
   integration_branch: codex/python-phase0
-  validated_commit: 74128d948ec24597f533a31c2d0fc479ba5b7cae
+  validated_commit: 8502e4e
   contract_version: contracts-v1-python
 
 statuses: [BLOCKED, READY, ACTIVE, REVIEW, MERGED, VALIDATED, SUPERSEDED]
@@ -52,7 +52,7 @@ waves:
         scope: Evidence provenance, indicators and fixtures
       - id: P1-OBS-001
         owner: worker-observability
-        status: ACTIVE
+        status: VALIDATED
         requirements: [OBS-001, OBS-002, OBS-004, SEC-004]
         acceptance_tests: [AT-003, AT-027, AT-028]
         scope: Audit, tracing, redaction and adversarial fixtures
@@ -63,25 +63,25 @@ waves:
     tasks:
       - id: P2-EXEC-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [EXE-002, EXE-005, EXE-006, EXE-007, EXE-008, EXE-009]
         acceptance_tests: [AT-017, AT-018, AT-019, AT-020, AT-021, AT-022, AT-036]
         scope: Alpaca paper adapter and execution recovery
       - id: P2-RISK-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [RSK-003, RSK-004, RSK-010, REL-005, REL-006]
         acceptance_tests: [AT-010, AT-013, AT-014, AT-023]
         scope: Reservations, concurrency, freshness and pause
       - id: P2-BASE-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [REC-001, EVA-001, EVA-002]
         acceptance_tests: [AT-029, AT-030]
         scope: Rules baseline and point-in-time cases
       - id: P2-MODEL-001
         owner: unassigned
-        status: BLOCKED
+        status: READY
         requirements: [AGT-002, AGT-003, AGT-004, REC-002]
         acceptance_tests: [AT-004, AT-005, AT-025, AT-026]
         scope: Model gateway and structured-output boundary
