@@ -62,20 +62,20 @@ waves:
     integration_gate: migrations, concurrency, restart and injection tests green
     tasks:
       - id: P2-EXEC-001
-        owner: unassigned
-        status: READY
+        owner: worker-execution-recovery
+        status: ACTIVE
         requirements: [EXE-002, EXE-005, EXE-006, EXE-007, EXE-008, EXE-009]
         acceptance_tests: [AT-017, AT-018, AT-019, AT-020, AT-021, AT-022, AT-036]
         scope: Alpaca paper adapter and execution recovery
       - id: P2-RISK-001
-        owner: unassigned
-        status: READY
+        owner: worker-risk-concurrency
+        status: ACTIVE
         requirements: [RSK-003, RSK-004, RSK-010, REL-005, REL-006]
         acceptance_tests: [AT-010, AT-013, AT-014, AT-023]
         scope: Reservations, concurrency, freshness and pause
       - id: P2-BASE-001
-        owner: unassigned
-        status: READY
+        owner: worker-baseline
+        status: ACTIVE
         requirements: [REC-001, EVA-001, EVA-002]
         acceptance_tests: [AT-029, AT-030]
         scope: Rules baseline and point-in-time cases
