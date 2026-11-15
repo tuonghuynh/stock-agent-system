@@ -133,8 +133,8 @@ class ModelGateway:
                    for key in call.arguments):
                 raise ValueError("model requested sensitive tool parameters")
         for finding in draft.findings:
-            if finding.analysis_timestamp < context.as_of:
-                raise ValueError("finding timestamp predates the frozen run")
+            if finding.analysis_timestamp != context.as_of:
+                raise ValueError("finding timestamp must equal the frozen snapshot time")
             finding_evidence = (
                 set(finding.evidence_ids)
                 | set(finding.supporting_evidence)

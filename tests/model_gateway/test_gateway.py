@@ -153,6 +153,23 @@ def test_at004_missing_evidence_and_timestamp_is_rejected() -> None:
     assert result.action is RecommendationAction.WAIT
 
 
+def test_at004_future_analysis_timestamp_fails_safe_after_bounded_repair() -> None:
+    future = json.loads(valid_payload())
+    finding = future["findings"][0]
+    assert isinstance(finding, dict)
+    finding["analysis_timestamp"] = (NOW + timedelta(microseconds=1)).isoformat()
+    unsafe = response(json.dumps(future))
+    provider = FakeModelProvider((unsafe, unsafe))
+
+    result = run(provider)
+
+    assert result.status is GatewayStatus.SAFE_FAILURE
+    assert result.action is RecommendationAction.WAIT
+    assert result.calls_used == 2
+    assert len(provider.calls) == 2
+    assert provider.calls[1].repair
+
+
 @pytest.mark.parametrize(
     "update",
     [
