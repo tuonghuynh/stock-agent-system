@@ -40,13 +40,15 @@ def test_at038_render_blueprint_is_development_paper_only_and_secret_safe() -> N
     assert env["LIVE_TRADING_ENABLED"]["value"] == "false"
     assert env["REQUIRE_DATABASE_READINESS"]["value"] == "true"
     assert env["DATABASE_URL"]["fromDatabase"]["property"] == "connectionString"
+    assert env["MODEL_PROVIDER"]["value"] == "openai"
     for secret in (
         "DEV_TEST_TOKEN",
-        "MODEL_API_KEY",
+        "OPENAI_API_KEY",
         "ALPACA_PAPER_KEY",
         "ALPACA_PAPER_SECRET",
     ):
         assert env[secret] == {"key": secret, "sync": False}
+    assert "MODEL_API_KEY" not in env
     assert blueprint["databases"][0]["plan"] == "0.1c-256mb"
     rendered = (ROOT / "render.yaml").read_text(encoding="utf-8").lower()
     assert "api.alpaca.markets" not in rendered

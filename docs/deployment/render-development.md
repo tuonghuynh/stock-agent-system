@@ -27,6 +27,9 @@ Create or sync the Render Blueprint on the development branch only. The Blueprin
 optional Alpaca paper credentials, and Render API/deploy credentials only through Render or local
 environment secrets. Never put values in this repository.
 
+Configure the model provider with `MODEL_PROVIDER=openai` and store the OpenAI project key only in
+the `OPENAI_API_KEY` secret. Do not configure or retain a `MODEL_API_KEY` alias.
+
 The paid development web plan runs `scripts/deployment/predeploy.sh` before starting the new
 service. That script rejects non-fake or live configuration and applies `alembic upgrade head`.
 Render sends traffic only after `/health/ready` succeeds.

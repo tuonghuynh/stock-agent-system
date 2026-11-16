@@ -32,7 +32,9 @@ services:
           property: connectionString
       - key: DEV_TEST_TOKEN
         sync: false
-      - key: MODEL_API_KEY
+      - key: MODEL_PROVIDER
+        value: openai
+      - key: OPENAI_API_KEY
         sync: false
       - key: ALPACA_PAPER_KEY
         sync: false

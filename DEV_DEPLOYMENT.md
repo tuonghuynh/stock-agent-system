@@ -59,13 +59,22 @@ Never commit values for:
 
 ```text
 DEV_TEST_TOKEN
-MODEL_API_KEY
+OPENAI_API_KEY
 ALPACA_PAPER_KEY
 ALPACA_PAPER_SECRET
 RENDER_DEPLOY_HOOK_URL or RENDER_API_KEY
 ```
 
 Database credentials should come from the Render database binding. Model and Alpaca secrets must never be passed to agents as prompt content or written to traces.
+
+Use the provider-specific OpenAI configuration:
+
+```text
+MODEL_PROVIDER=openai
+OPENAI_API_KEY=<OpenAI project API key>
+```
+
+Do not introduce a second generic model-key alias.
 
 ## Migration behavior
 
